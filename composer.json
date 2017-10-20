@@ -1,6 +1,12 @@
 {
+    "autoload": {
+        "psr-4": {
+            "razorbacks\\blackboard\\rest\\": "src"
+        }
+    },
     "require": {
-        "kitetail/zttp": "^0.3.0"
+        "kitetail/zttp": "^0.3.0",
+        "php": "^7.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.4"
