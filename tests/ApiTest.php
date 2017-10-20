@@ -20,4 +20,15 @@ class ApiTest extends TestCase
 
         $this->assertNotEmpty($api->getToken());
     }
+
+    /**
+     * @expectedException Exception
+     */
+    public function test_can_invalidate_token()
+    {
+        $credentials = $this->getApiCredentials();
+        $credentials[2] = 'badpass';
+
+        $api = new Api(...$credentials);
+    }
 }

@@ -20,12 +20,17 @@ class Api
     {
         $url = $this->baseUrl.'/oauth2/token?grant_type=client_credentials';
 
-        $this->token = Zttp::withHeaders([
+        $response = Zttp::withHeaders([
             'Content-Type' => 'application/x-www-form-urlencoded',
         ])
         ->withBasicAuth($applicationId, $secret)
-        ->post($url)
-        ->json()['access_token'] ?? null;
+        ->post($url);
+
+        if (empty($token = $response->json()['access_token'] ?? null)) {
+            throw new \Exception('No access token:'.PHP_EOL.$response->body());
+        }
+
+        $this->token = $token;
     }
 
     public function getToken()
