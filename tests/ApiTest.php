@@ -53,7 +53,7 @@ class ApiTest extends TestCase
         $api->get('/courses/_0_0');
     }
 
-    public function test_can_create_grade_column()
+    public function test_can_create_and_delete_grade_column()
     {
         $courseId = getenv('BB_REST_API_COURSE_ID');
 
@@ -76,5 +76,9 @@ class ApiTest extends TestCase
         $columnId = $response['id'] ?? null;
 
         $this->assertNotEmpty($columnId);
+
+        $response = $api->delete("/courses/{$courseId}/gradebook/columns/{$columnId}");
+
+        $this->assertEmpty($response);
     }
 }

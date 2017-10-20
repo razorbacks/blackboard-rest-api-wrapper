@@ -62,6 +62,21 @@ class Api
     {
         return $this->send('POST', $endpoint, $data);
     }
+
+    public function put(string $endpoint, array $data)
+    {
+        return $this->send('PUT', $endpoint, $data);
+    }
+
+    public function patch(string $endpoint, array $data)
+    {
+        return $this->send('PATCH', $endpoint, $data);
+    }
+
+    public function delete(string $endpoint, array $data = [])
+    {
+        return $this->send('DELETE', $endpoint, $data);
+    }
 }
 
 class BadResponse extends Exception {}
