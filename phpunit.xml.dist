@@ -28,5 +28,6 @@
         <env name="BB_REST_API_HOSTNAME" value="http://localhost:9876"/>
         <env name="BB_REST_API_APPLICATION_ID" value="applicationId"/>
         <env name="BB_REST_API_SECRET" value="secret"/>
+        <env name="BB_REST_API_COURSE_ID" value="_155_1"/>
     </php>
 </phpunit>

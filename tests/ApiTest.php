@@ -31,4 +31,15 @@ class ApiTest extends TestCase
 
         $api = new Api(...$credentials);
     }
+
+    public function test_can_get_course_members()
+    {
+        $courseId = getenv('BB_REST_API_COURSE_ID');
+
+        $api = new Api(...$this->getApiCredentials());
+
+        $results = $api->get("/courses/{$courseId}/users")['results'] ?? null;
+
+        $this->assertNotEmpty($results);
+    }
 }

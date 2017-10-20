@@ -37,4 +37,13 @@ class Api
     {
         return $this->token;
     }
+
+    public function get(string $endpoint)
+    {
+        return Zttp::withHeaders([
+            'Authorization' => "Bearer {$this->getToken()}",
+        ])
+        ->get($this->baseUrl.$endpoint)
+        ->json();
+    }
 }
