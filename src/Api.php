@@ -3,6 +3,7 @@
 namespace razorbacks\blackboard\rest;
 
 use Zttp\Zttp;
+use Exception;
 
 class Api
 {
@@ -27,7 +28,7 @@ class Api
         ->post($url);
 
         if (empty($token = $response->json()['access_token'] ?? null)) {
-            throw new \Exception('No access token:'.PHP_EOL.$response->body());
+            throw new Exception('No access token:'.PHP_EOL.$response->body());
         }
 
         $this->token = $token;
@@ -40,10 +41,17 @@ class Api
 
     public function get(string $endpoint)
     {
-        return Zttp::withHeaders([
+        $response = Zttp::withHeaders([
             'Authorization' => "Bearer {$this->getToken()}",
         ])
-        ->get($this->baseUrl.$endpoint)
-        ->json();
+        ->get($this->baseUrl.$endpoint);
+
+        if (!$response->isOk()) {
+            throw new BadResponse('Response not OK:'.$response->status().PHP_EOL.$response->body());
+        }
+
+        return $response->json();
     }
 }
+
+class BadResponse extends Exception {}

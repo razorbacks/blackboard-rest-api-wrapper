@@ -42,4 +42,14 @@ class ApiTest extends TestCase
 
         $this->assertNotEmpty($results);
     }
+
+    /**
+     * @expectedException razorbacks\blackboard\rest\BadResponse
+     */
+    public function test_can_invalidate_course()
+    {
+        $api = new Api(...$this->getApiCredentials());
+
+        $api->get('/courses/_0_0');
+    }
 }
