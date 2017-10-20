@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false">
+    <testsuites>
+        <testsuite name="Integration">
+            <directory suffix="Test.php">./tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-html" target="./tests/coverage"
+            lowUpperBound="35"   highLowerBound="90"/>
+        <log type="coverage-text" target="php://stdout"
+            showUncoveredFiles="false"/>
+    </logging>
+    <php>
+        <env name="BB_REST_API_HOSTNAME" value="http://localhost:9876"/>
+        <env name="BB_REST_API_APPLICATION_ID" value="applicationId"/>
+        <env name="BB_REST_API_SECRET" value="secret"/>
+    </php>
+</phpunit>

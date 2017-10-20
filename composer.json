@@ -1,5 +1,8 @@
 {
     "require": {
         "kitetail/zttp": "^0.3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.4"
     }
 }
