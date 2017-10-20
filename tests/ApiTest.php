@@ -52,4 +52,29 @@ class ApiTest extends TestCase
 
         $api->get('/courses/_0_0');
     }
+
+    public function test_can_create_grade_column()
+    {
+        $courseId = getenv('BB_REST_API_COURSE_ID');
+
+        $api = new Api(...$this->getApiCredentials());
+
+        $gradeColumn = [
+            'name' => 'Test Column',
+            'description' => 'This is a test column.',
+            'score' => [
+                'possible' => 10,
+                'decimalPlaces' => 0,
+            ],
+            'availability' => [
+                'available' => 'Yes',
+            ],
+        ];
+
+        $response = $api->post("/courses/{$courseId}/gradebook/columns", $gradeColumn);
+
+        $columnId = $response['id'] ?? null;
+
+        $this->assertNotEmpty($columnId);
+    }
 }

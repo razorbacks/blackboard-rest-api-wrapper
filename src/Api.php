@@ -39,18 +39,28 @@ class Api
         return $this->token;
     }
 
-    public function get(string $endpoint)
+    public function send(string $method, string $endpoint, array $data = [])
     {
         $response = Zttp::withHeaders([
             'Authorization' => "Bearer {$this->getToken()}",
         ])
-        ->get($this->baseUrl.$endpoint);
+        ->$method($this->baseUrl.$endpoint, $data);
 
         if (!$response->isOk()) {
             throw new BadResponse('Response not OK:'.$response->status().PHP_EOL.$response->body());
         }
 
         return $response->json();
+    }
+
+    public function get(string $endpoint, array $data = [])
+    {
+        return $this->send('GET', $endpoint, $data);
+    }
+
+    public function post(string $endpoint, array $data)
+    {
+        return $this->send('POST', $endpoint, $data);
     }
 }
 
