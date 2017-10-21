@@ -1,4 +1,13 @@
 {
+    "name": "razorbacks/blackboard-rest-api-wrapper",
+    "description": "Lightweight wrapper for https://developer.blackboard.com/portal/displayApi",
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Jeff Puckett",
+            "email": "jpucket@uark.edu"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "razorbacks\\blackboard\\rest\\": "src"
