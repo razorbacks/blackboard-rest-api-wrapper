@@ -10,9 +10,9 @@ class Api
     protected $baseUrl = '/learn/api/public/v1';
     protected $token;
 
-    public function __construct(string $hostname, string $applicationId, string $secret)
+    public function __construct(string $server, string $applicationId, string $secret)
     {
-        $this->baseUrl = rtrim($hostname, '/').$this->baseUrl;
+        $this->baseUrl = rtrim($server, '/').$this->baseUrl;
 
         $this->setToken($applicationId, $secret);
     }

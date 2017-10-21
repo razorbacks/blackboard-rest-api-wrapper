@@ -8,7 +8,7 @@ class ApiTest extends TestCase
     protected function getApiCredentials()
     {
         return [
-            getenv('BB_REST_API_HOSTNAME'),
+            getenv('BB_REST_API_SERVER'),
             getenv('BB_REST_API_APPLICATION_ID'),
             getenv('BB_REST_API_SECRET'),
         ];
