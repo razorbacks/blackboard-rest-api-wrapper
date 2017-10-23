@@ -22,7 +22,7 @@ $server = 'https://learn.uark.edu';
 $applicationId = 'your-application-id';
 $secret = 'secret';
 
-$api = new Api($server, $applicationId, $secret);
+$blackboard = new Api($server, $applicationId, $secret);
 
 // create a new manual grade column for a course
 $courseId = '_123_1';
@@ -38,11 +38,11 @@ $gradeColumn = [
 ];
 
 // create and hydrate the model with new ID
-$gradeColumn = $api->post("/courses/{$courseId}/gradebook/columns", $gradeColumn);
+$gradeColumn = $blackboard->post("/courses/{$courseId}/gradebook/columns", $gradeColumn);
 
 // assign a grade to a student
 $userId = '_65538_1';
-$api->patch("/courses/{$courseId}/gradebook/columns/{$gradeColumn['id']}/users/{$userId}", [
+$blackboard->patch("/courses/{$courseId}/gradebook/columns/{$gradeColumn['id']}/users/{$userId}", [
     'score' => 9,
 ]);
 ```
