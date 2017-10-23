@@ -71,7 +71,16 @@ window.onload = function() {
 
   // Build a system
   const ui = SwaggerUIBundle({
-    url: "https://getcors.com/https://developer.blackboard.com/portal/docs/apis/learn-swagger.json",
+    urls: [
+        {
+            url: "https://getcors.com/https://developer.blackboard.com/portal/docs/apis/learn-swagger.json",
+            name: "official",
+        },
+        {
+            url: "2017-10-20.json",
+            name: "backup 2017-10-20",
+        },
+    ],
     dom_id: '#swagger-ui',
     deepLinking: true,
     presets: [
