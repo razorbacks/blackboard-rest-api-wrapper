@@ -2,6 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 use razorbacks\blackboard\rest\Api;
+use razorbacks\blackboard\rest\BadResponse;
 
 class ApiTest extends TestCase
 {
@@ -50,7 +51,12 @@ class ApiTest extends TestCase
     {
         $api = new Api(...$this->getApiCredentials());
 
-        $api->get('/courses/_0_0');
+        try {
+            $api->get('/courses/_0_0');
+        } catch (BadResponse $e) {
+            $this->assertEquals(404, $e->json()['status']);
+            throw $e;
+        }
     }
 
     public function test_can_create_and_delete_grade_column()

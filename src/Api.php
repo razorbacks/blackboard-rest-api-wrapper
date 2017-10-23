@@ -47,7 +47,13 @@ class Api
         ->$method($this->baseUrl.$endpoint, $data);
 
         if (!$response->isOk()) {
-            throw new BadResponse('Response not OK:'.$response->status().PHP_EOL.$response->body());
+            $status = $response->status();
+            $json = $response->body();
+
+            $exception = new BadResponse('Response not OK:'.$status.PHP_EOL.$json, $status);
+            $exception->json($json);
+
+            throw $exception;
         }
 
         return $response->json();
@@ -78,5 +84,3 @@ class Api
         return $this->send('DELETE', $endpoint, $data);
     }
 }
-
-class BadResponse extends Exception {}
