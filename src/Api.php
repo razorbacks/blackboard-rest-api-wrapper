@@ -3,7 +3,6 @@
 namespace razorbacks\blackboard\rest;
 
 use Zttp\Zttp;
-use Exception;
 
 class Api
 {
@@ -28,7 +27,13 @@ class Api
         ->post($url);
 
         if (empty($token = $response->json()['access_token'] ?? null)) {
-            throw new Exception('No access token:'.PHP_EOL.$response->body());
+            $status = $response->status();
+            $json = $response->body();
+
+            $exception = new BadAuthentication('No access token:'.$status.PHP_EOL.$json, $status);
+            $exception->json($json);
+
+            throw $exception;
         }
 
         $this->token = $token;

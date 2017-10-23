@@ -23,7 +23,7 @@ class ApiTest extends TestCase
     }
 
     /**
-     * @expectedException Exception
+     * @expectedException razorbacks\blackboard\rest\BadAuthentication
      */
     public function test_can_invalidate_token()
     {
