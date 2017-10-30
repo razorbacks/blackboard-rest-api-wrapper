@@ -43,8 +43,9 @@ $gradeColumn = [
 $gradeColumn = $blackboard->post("/courses/{$courseId}/gradebook/columns", $gradeColumn);
 
 // assign a grade to a student
-$userId = '_65538_1';
-$blackboard->patch("/courses/{$courseId}/gradebook/columns/{$gradeColumn['id']}/users/{$userId}", [
+$username = 'jdoe';
+$endpoint = "/courses/{$courseId}/gradebook/columns/{$gradeColumn['id']}/users/userName:$username";
+$blackboard->patch($endpoint, [
     'score' => 9,
 ]);
 ```
